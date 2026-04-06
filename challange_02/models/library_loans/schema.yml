@@ -21,8 +21,31 @@ sources:
           - name: loan_id
             data_tests:
               - not_null
+          - name: member_id
+            data_tests:
+              - relationships:
+                  arguments:
+                    to: ref('members')
+                    field: member_id
+          - name: book_id
+            data_tests:
+              - relationships:
+                  arguments:
+                    to: ref('books_factual')
+                    field: book_id
+          - name: book_id
+            data_tests:
+              - relationships:
+                  arguments:
+                    to: ref('books_fictional')
+                    field: book_id
       - name: members
         columns:
           - name: member_id
             data_tests:
               - not_null
+          - name: membership_tier
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ["Bronze", "Silver", "Gold"]

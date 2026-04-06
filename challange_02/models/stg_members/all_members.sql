@@ -1,0 +1,1 @@
+select member_id, membership_tier from members

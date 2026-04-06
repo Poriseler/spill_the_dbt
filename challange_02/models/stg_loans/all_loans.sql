@@ -1,0 +1,1 @@
+select loan_id, member_id, late_fee  from loans
