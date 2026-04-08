@@ -4,48 +4,40 @@ sources:
   - name: library
     schema: main
     tables:
-      - name: books_factual
-        columns:
-          - name: book_id
-            data_tests:
-              - unique
-              - not_null
       - name: books_fictional
-        columns:
-          - name: book_id
-            data_tests:
-              - unique
-              - not_null
+      - name: books_factual
       - name: loans
-        columns:
-          - name: loan_id
-            data_tests:
-              - not_null
-          - name: member_id
-            data_tests:
-              - relationships:
-                  arguments:
-                    to: ref('members')
-                    field: member_id
-          - name: book_id
-            data_tests:
-              - relationships:
-                  arguments:
-                    to: ref('books_factual')
-                    field: book_id
-          - name: book_id
-            data_tests:
-              - relationships:
-                  arguments:
-                    to: ref('books_fictional')
-                    field: book_id
       - name: members
-        columns:
-          - name: member_id
-            data_tests:
-              - not_null
-          - name: membership_tier
-            data_tests:
-              - accepted_values:
-                  arguments:
-                    values: ["Bronze", "Silver", "Gold"]
+
+models:
+  - name: stg_books
+    columns:
+      - name: book_id
+        data_tests:
+          - unique
+          - not_null
+  - name: stg_members
+    columns:
+      - name: member_id
+        data_tests:
+          - not_null
+      - name: membership_tier
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Bronze", "Silver", "Gold"]
+  - name: stg_loans
+    columns:
+      - name: loan_id
+        data_tests:
+          - not_null
+      - name: book_id
+        data_tests:
+          - relationships:
+              to: ref('stg_books')
+              field: book_id
+      - name: member_id
+        data_tests:
+          - relationships:
+              to: ref('stg_members')
+              field: member_id
