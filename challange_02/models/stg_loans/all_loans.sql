@@ -1,1 +1,0 @@
-select distinct loan_id, member_id, late_fee from loans where loan_id is not null and member_id is not null

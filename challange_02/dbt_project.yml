@@ -31,3 +31,9 @@ models:
   challange_02:
     library_loans:
       materialized: table
+    stg_books:
+      materialized: table
+    stg_loans:
+      materialized: table
+    stg_members:
+      materialized: table
